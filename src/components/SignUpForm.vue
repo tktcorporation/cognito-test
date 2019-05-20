@@ -19,6 +19,7 @@
 <script lang="ts">
 // Sasasasa2:
 import {Component, Vue} from 'vue-property-decorator';
+import { authStoreModule } from '../vuex_modules/auth';
 @Component
 export default class SignUpForm extends Vue{
     // nickname: string = "";
@@ -37,7 +38,8 @@ export default class SignUpForm extends Vue{
                 // nickname: this.nickname
             }
         }
-        if(this.$store.dispatch('signUp', signUpParam)){
+        
+        if(authStoreModule.signUp(signUpParam)){
             this.$router.push('sign_up/confirm');
         };
     }

@@ -2,9 +2,7 @@
   .home
     .box
       p
-        router-link(to="/login") ログイン
-      p
-        router-link(to="/sign_up") 新規登録
+        button.button(@click="logout()") ログアウト
       p
         button.button.is-info(v-on:click="getTokens") show tokens
     p {{tokens}}
@@ -13,6 +11,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import { AuthTokens } from '../vuex_modules/auth';
 
 @Component({
   components: {
@@ -20,12 +19,17 @@ import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
   },
 })
 export default class Home extends Vue {
-  tokens: any = {
-
+  private tokens: AuthTokens = {
+    idToken: '',
+    accessToken: '',
+    refreshToken: '',
   };
-  private getTokens(){
+  private getTokens() {
     this.tokens = this.$store.state.authTokens;
-    console.log(this.tokens);
+  }
+  private logout() {
+    this.$store.dispatch('logout');
+    this.$router.push('login');
   }
 }
 </script>

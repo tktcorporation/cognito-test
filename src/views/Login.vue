@@ -2,6 +2,7 @@
     .container
         .column.is-4.is-offset-4
             LoginForm
+            router-link(to="/sign_up") 新規登録
             router-link(to="/") Home
 </template>
 

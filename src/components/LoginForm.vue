@@ -12,7 +12,10 @@
 
 <script lang="ts">
 //password_sample: Sasasasa2:
-import {Component, Vue} from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
+import { authStoreModule } from '../vuex_modules/auth';
+import router from '../router';
+
 @Component
 export default class LoginForm extends Vue{
     email: string = "";
@@ -22,10 +25,10 @@ export default class LoginForm extends Vue{
         const loginParams = {
             email: this.email,
             password: this.password,
-        }
-        if(this.$store.dispatch('login', loginParams)){
-            this.$router.push('/')
         };
+        if(authStoreModule.login(this.email, this.password)) {
+            router.push('/');
+        }
     }
 }
 </script>
