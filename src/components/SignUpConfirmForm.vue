@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import { authStoreModule } from '../vuex_modules/auth';
+import { authStoreModule } from '@/store/modules/auth';
 import router from '../router';
 @Component
 export default class Confirm extends Vue{

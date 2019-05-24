@@ -1,8 +1,8 @@
 
-import store from '../store';
+import { authStoreModule } from '@/store/modules/auth';
 export default class LoginGuards{
     static isLogedin(): boolean {
-        if(store.getters.accessToken == "") {
+        if(authStoreModule.GET_AUTH_TOKENS.accessToken == "") {
             return false;
         }
         return true;

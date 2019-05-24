@@ -10,12 +10,11 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-import { AuthTokens } from '../vuex_modules/auth';
+import { AuthTokens } from '@/store/modules/auth';
+import { authStoreModule } from '@/store/modules/auth';
 
 @Component({
   components: {
-    HelloWorld,
   },
 })
 export default class Home extends Vue {
@@ -25,11 +24,13 @@ export default class Home extends Vue {
     refreshToken: '',
   };
   private getTokens() {
-    this.tokens = this.$store.state.authTokens;
+    this.tokens = authStoreModule.GET_AUTH_TOKENS;
+    console.log(this.tokens);
   }
   private logout() {
-    this.$store.dispatch('logout');
-    this.$router.push('login');
+    console.log("saas");
+    authStoreModule.logout();
+    this.$router.push('/login');
   }
 }
 </script>

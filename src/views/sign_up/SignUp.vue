@@ -2,7 +2,11 @@
     .container
         .column.is-4.is-offset-4
             SignUpForm
-            router-link(to='/') Home
+            p
+                router-link(to='login') ログイン
+            p
+                router-link(to='/') Home
+
 </template>
 
 <script lang='ts'>

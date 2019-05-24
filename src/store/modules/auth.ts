@@ -5,7 +5,7 @@ import {
     getModule,
     Module,
 } from 'vuex-module-decorators';
-import store from 'vuex';
+import store from '@/store';
 import Amplify, {
     Auth,
     API,
@@ -56,6 +56,7 @@ class AuthStore extends VuexModule implements UserAttributes, AuthTokens {
     }
     @Mutation
     public SET_AUTH_TOKRNS_BLANK() {
+        console.log("set");
         this.idToken = '';
         this.accessToken = '';
         this.refreshToken = '';

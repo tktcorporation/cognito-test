@@ -13,7 +13,7 @@
 <script lang="ts">
 //password_sample: Sasasasa2:
 import { Component, Vue } from 'vue-property-decorator';
-import { authStoreModule } from '../vuex_modules/auth';
+import { authStoreModule } from '@/store/modules/auth';
 import router from '../router';
 
 @Component
