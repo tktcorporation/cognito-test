@@ -20,7 +20,11 @@ export default class Confirm extends Vue{
     confirmationCode: string = "";
 
     private confirm() {
-        if (authStoreModule.signUpConfirm(this.email, this.confirmationCode)){
+        const confirmParams = {
+            email: this.email,
+            code: this.confirmationCode
+        }
+        if (authStoreModule.signUpConfirm(confirmParams)){
             router.push('/login');
         }
     }

@@ -26,7 +26,7 @@ export default class LoginForm extends Vue{
             email: this.email,
             password: this.password,
         };
-        if(authStoreModule.login(this.email, this.password)) {
+        if(authStoreModule.login(loginParams)) {
             router.push('/');
         }
     }

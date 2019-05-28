@@ -56,7 +56,6 @@ class AuthStore extends VuexModule implements UserAttributes, AuthTokens {
     }
     @Mutation
     public SET_AUTH_TOKRNS_BLANK() {
-        console.log("set");
         this.idToken = '';
         this.accessToken = '';
         this.refreshToken = '';
@@ -79,8 +78,8 @@ class AuthStore extends VuexModule implements UserAttributes, AuthTokens {
     }
 
     @Action({})
-    public signUpConfirm(email: string, code: string): boolean {
-        Auth.confirmSignUp(email, code)
+    public signUpConfirm(confirmParams: { email: string, code: string }): boolean {
+        Auth.confirmSignUp(confirmParams.email, confirmParams.code)
             .then((data: any) => {
                 if (data === 'SUCCESS') {
                     alert('ユーザ登録が完了しました。');
@@ -96,8 +95,8 @@ class AuthStore extends VuexModule implements UserAttributes, AuthTokens {
         return false;
     }
     @Action({})
-    public login(email: string, password: string): boolean {
-        Auth.signIn(email, password)
+    public login(loginParams: { email: string, password: string }): boolean {
+        Auth.signIn(loginParams.email, loginParams.password)
             .then((data) => {
                 const authTokens: AuthTokens = {
                     idToken: data.signInUserSession.getIdToken().getJwtToken(),
@@ -105,6 +104,7 @@ class AuthStore extends VuexModule implements UserAttributes, AuthTokens {
                     refreshToken: data.signInUserSession.getRefreshToken().getToken(),
                 };
                 this.SET_AUTH_TOKENS(authTokens);
+                console.log(this.GET_AUTH_TOKENS);
                 alert('サインインに成功しました');
                 return true;
             })
@@ -123,12 +123,15 @@ class AuthStore extends VuexModule implements UserAttributes, AuthTokens {
         return this.email;
     }
     get GET_AUTH_TOKENS(): AuthTokens {
+        console.log(this.idToken);
         const authTokens: AuthTokens = {
             idToken: this.idToken,
             accessToken: this.accessToken,
             refreshToken: this.refreshToken,
         };
         return authTokens;
+
+        // return this.idToken;
     }
 }
 export const authStoreModule = getModule(AuthStore);

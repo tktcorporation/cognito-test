@@ -31,7 +31,7 @@ export default class SignUpForm extends Vue{
         if(!this.password || !this.passwordConfirm || this.password != this.passwordConfirm) {
             return;
         }
-        const signUpParam = {
+        const signUpParams = {
             username: this.email,
             password: this.password,
             attributes: {
@@ -39,7 +39,7 @@ export default class SignUpForm extends Vue{
             }
         }
         
-        if(authStoreModule.signUp(signUpParam)){
+        if(authStoreModule.signUp(signUpParams)){
             this.$router.push('sign_up/confirm');
         };
     }

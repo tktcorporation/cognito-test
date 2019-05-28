@@ -15,7 +15,8 @@
       "webpack-env",
       "mocha",
       "chai",
-      "node"
+      "node",
+      "vuetify"
     ],
     "paths": {
       "@/*": [
