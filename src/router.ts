@@ -14,7 +14,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home,
+      component: Home, meta: { requiresAuth: true },
     },
     {
       path: '/about',
@@ -27,17 +27,17 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login,
+      component: Login, meta: { requiresUnAuth: true },
     },
     {
       path: '/sign_up',
       name: 'sign_up',
-      component: SignUp,
+      component: SignUp, meta: { requiresUnAuth: true },
     },
     {
       path: '/sign_up/confirm',
       name: 'confirm',
-      component: Confirm,
+      component: Confirm, meta: { requiresUnAuth: true },
     },
   ],
 });

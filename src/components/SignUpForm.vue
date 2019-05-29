@@ -19,6 +19,7 @@
 <script lang="ts">
 // Sasasasa2:
 import {Component, Vue} from 'vue-property-decorator';
+import Amplify, { Auth } from 'aws-amplify';
 @Component
 export default class SignUpForm extends Vue{
     // nickname: string = "";
@@ -30,16 +31,21 @@ export default class SignUpForm extends Vue{
         if(!this.password || !this.passwordConfirm || this.password != this.passwordConfirm) {
             return;
         }
-        const signUpParam = {
+        const signUpParams = {
             username: this.email,
             password: this.password,
             attributes: {
                 // nickname: this.nickname
             }
         }
-        if(this.$store.dispatch('signUp', signUpParam)){
-            this.$router.push('sign_up/confirm');
-        };
+        Auth.signUp(signUpParams)
+            .then((data: any) => {
+                this.$router.push('sign_up/confirm')
+            })
+            .catch((err: any) => {
+                alert('ユーザー登録に失敗しました');
+            });
+
     }
 }
 </script>

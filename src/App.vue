@@ -1,5 +1,8 @@
 <template lang="pug">
-  #app
+  v-app
+    v-toolbar
+      v-toolbar-title.headline
+        span.font-weight-light Push通知
     img(alt="Vue logo" src="./assets/logo.png")
     router-view
 </template>

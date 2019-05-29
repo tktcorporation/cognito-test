@@ -2,7 +2,10 @@
     .container
         .column.is-4.is-offset-4
             LoginForm
-            router-link(to="/") Home
+            p
+                router-link(to="/sign_up") 新規登録
+            p
+                router-link(to="/") Home
 </template>
 
 <script lang="ts">
@@ -14,6 +17,7 @@
             LoginForm,
         },
     })
-    export default class Login extends Vue {}
+    export default class Login extends Vue {
+    }
 </script>
 
