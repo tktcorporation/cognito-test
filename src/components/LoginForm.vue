@@ -13,7 +13,7 @@
 <script lang="ts">
 //password_sample: Sasasasa2:
 import { Component, Vue } from 'vue-property-decorator';
-import { authStoreModule } from '@/store/modules/auth';
+import Amplify, { Auth, API } from 'aws-amplify';
 import router from '../router';
 
 @Component
@@ -26,9 +26,14 @@ export default class LoginForm extends Vue{
             email: this.email,
             password: this.password,
         };
-        if(authStoreModule.login(loginParams)) {
-            router.push('/');
-        }
+        Auth.signIn(loginParams.email, loginParams.password)
+            .then((data) => {
+                alert('サインインに成功しました');
+                router.push('/');
+            })
+            .catch((err) => {
+                alert('サインインに失敗しました');
+            });
     }
 }
 </script>

@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import { authStoreModule } from '@/store/modules/auth';
+import Amplify, { Auth } from 'aws-amplify';
 import router from '../router';
 @Component
 export default class Confirm extends Vue{
@@ -24,9 +24,16 @@ export default class Confirm extends Vue{
             email: this.email,
             code: this.confirmationCode
         }
-        if (authStoreModule.signUpConfirm(confirmParams)){
-            router.push('/login');
-        }
+        Auth.confirmSignUp(confirmParams.email, confirmParams.code)
+            .then((data: any) => {
+                console.log(data);
+                alert('ユーザ登録が完了しました。');
+                router.push('/login');
+            })
+            .catch((err: any) => {
+                alert('検証に失敗しました');
+            });
+
     }
 }
 </script>

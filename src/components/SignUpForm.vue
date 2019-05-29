@@ -19,7 +19,7 @@
 <script lang="ts">
 // Sasasasa2:
 import {Component, Vue} from 'vue-property-decorator';
-import { authStoreModule } from '@/store/modules/auth';
+import Amplify, { Auth } from 'aws-amplify';
 @Component
 export default class SignUpForm extends Vue{
     // nickname: string = "";
@@ -38,10 +38,14 @@ export default class SignUpForm extends Vue{
                 // nickname: this.nickname
             }
         }
-        
-        if(authStoreModule.signUp(signUpParams)){
-            this.$router.push('sign_up/confirm');
-        };
+        Auth.signUp(signUpParams)
+            .then((data: any) => {
+                this.$router.push('sign_up/confirm')
+            })
+            .catch((err: any) => {
+                alert('ユーザー登録に失敗しました');
+            });
+
     }
 }
 </script>
