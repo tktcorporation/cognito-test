@@ -8,7 +8,7 @@ const LoginGuard = async (to: any, from: any, next: any) => {
     try {
         const user = await Auth.currentAuthenticatedUser();
         console.log(user);
-        vuex.
+        authStoreModule.SET_USERNAME(user.username);
         console.log(user.username);
         if(to.matched.some((record: { meta: { requiresUnAuth: any; }; }) => record.meta.requiresUnAuth) ){
             console.log("ログイン画面いけない");
