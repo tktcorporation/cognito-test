@@ -1,11 +1,13 @@
 <template lang="pug">
   v-app
-    v-toolbar
-      v-toolbar-title.headline
-        span.font-weight-light Push通知
-    img(alt="Vue logo" src="./assets/logo.png")
-    router-view
+    v-content
+      v-container(fluid="")
+        router-view
 </template>
+
+<script lang='ts'>
+export default {}
+</script>
 
 <style lang="scss">
 @import '../node_modules/bulma/bulma.sass';
