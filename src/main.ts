@@ -9,37 +9,11 @@ import Amplify, {
   API
 } from 'aws-amplify';
 import config from './config';
-import AuthGuards from './guards/login';
+import { LoginGuard } from './guards/login';
 
 Vue.config.productionTip = false;
 
-router.beforeEach((to, from, next) => {
-  Auth.currentAuthenticatedUser()
-    .then(data => {
-      console.log(data);
-      if (to.matched.some(record => record.meta.requiresUnAuth)) {
-        return next({
-          path: '/',
-          query: {
-            redirect: to.fullPath
-          }
-        });
-      }
-      next();
-    })
-    .catch(err => {
-      console.log(err);
-      if (to.matched.some(record => record.meta.requiresAuth)) {
-        return next({
-          path: '/login',
-          query: {
-            redirect: to.fullPath
-          }
-        });
-      }
-      next();
-    })
-});
+router.beforeEach(LoginGuard);
 
 new Vue({
   router,
