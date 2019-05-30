@@ -2,29 +2,37 @@ import Amplify, {
     Auth,
     API
 } from 'aws-amplify';
+import { authStoreModule } from '@/store/modules/auth';
 const LoginGuard = async (to: any, from: any, next: any) => {
     console.log("aaaa");
     try {
         const user = await Auth.currentAuthenticatedUser();
         console.log(user);
-        // if(to.matched.some((record: { meta: { requiresAuth: any; }; }) => record.meta.requiresAuth && user === 'not authenticated') ){
-        //     next({
-        //         path: '/login',
-        //         query: {
-        //             redirect: to.fullPath
-        //         }
-        //         });
-        //     return;
-        // }
+        vuex.
+        console.log(user.username);
+        if(to.matched.some((record: { meta: { requiresUnAuth: any; }; }) => record.meta.requiresUnAuth) ){
+            console.log("ログイン画面いけない");
+            next({
+                path: '/',
+                query: {
+                    redirect: to.fullPath
+                }
+                });
+            return;
+        }
     } catch(err) {
-        // next({
-        //     path: '/login',
-        //     query: {
-        //         redirect: to.fullPath
-        //     }
-        // });
-        return;
+        if(to.matched.some((record: { meta: { requiresAuth: any; }; }) => record.meta.requiresAuth) ){
+            console.log("ログインしろよ");
+            next({
+                path: '/login',
+                query: {
+                    redirect: to.fullPath
+                }
+            });
+            return;
+        }
     }
+    console.log("次へ");
     next()
 }
 export { LoginGuard }
