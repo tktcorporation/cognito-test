@@ -1,23 +1,14 @@
 <template lang="pug">
-    .hoge
-        v-navigation-drawer.primary.lighten-3(:clipped="clipped" v-model="drawer" enable-resize-watcher="" app="" dark="")
-            v-list
-                v-list-group(v-for="item in items" :value="item.active" :key="item.title")
-                    v-list-tile.yellow--text(slot="item" :to="item.path == '#' ? '' : item.path" :exact="item.exact" active-class="red--text")
-                        v-list-tile-action
-                            v-icon {{ item.action }}
-                        v-list-tile-content
-                            v-list-tile-title {{ item.title }}
-                        v-list-tile-action(v-if="item.items.length > 0")
-                            v-icon keyboard_arrow_down
-        v-toolbar(fixed="" app="" :clipped-left="clipped")
-            v-toolbar-side-icon(@click.stop="drawer = !drawer")
-            v-toolbar-title Topics
-            v-spacer
-            v-btn(icon="")
-                v-icon more_vert
-        v-content
-            v-container(fluid="")
+    v-navigation-drawer.primary.lighten-3(:clipped="clipped" v-model="drawer" enable-resize-watcher="" app="" dark="")
+        v-list
+            v-list-group(v-for="item in items" :value="item.active" :key="item.title")
+                v-list-tile.yellow--text(slot="item" :to="item.path == '#' ? '' : item.path" :exact="item.exact" active-class="red--text")
+                    v-list-tile-action
+                        v-icon {{ item.action }}
+                    v-list-tile-content
+                        v-list-tile-title {{ item.title }}
+                    v-list-tile-action(v-if="item.items.length > 0")
+                        v-icon keyboard_arrow_down
 </template>
 
 <script lang="ts">
