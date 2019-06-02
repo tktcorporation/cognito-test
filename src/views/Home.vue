@@ -36,6 +36,7 @@
         span.title Youtube
       v-spacer
       v-layout(row="" align-center="" style="max-width: 650px")
+        v-btn(@click="logout()") ログアウト
         v-text-field(placeholder="Search..." single-line="" append-icon="search" :append-icon-cb="() => {}" color="white" hide-details="")
     v-content
       v-container(fill-height="")
